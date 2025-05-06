@@ -14,7 +14,7 @@
     "@babel/core": "^7.27.1",
     "@babel/preset-env": "^7.21.1",
     "gulp-htmlhint": "^2.1.0",
-    "gulp-htmlmin": "^6.0.1",
+    "gulp-htmlmin": "^5.0.1",
     "gulp-csslint": "^1.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-eslint": "^6.0.0"
