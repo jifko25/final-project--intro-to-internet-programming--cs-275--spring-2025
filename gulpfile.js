@@ -6,7 +6,6 @@ const uglify = require('gulp-uglify');
 const csslint = require('gulp-csslint');
 const cleanCSS = require('gulp-clean-css')
 const eslint = require('gulp-eslint');
-const browserSync = require('browser-sync')
 
 const paths = {
     html: 'src/**/*.html',
@@ -40,7 +39,6 @@ gulp.task('compressCSS', () =>
         .pipe(gulp.dest(paths.dest))
 );
 
-
 gulp.task('validateJS', function() {
     return gulp.src('src/js/**/*.js')
       .pipe(eslint())
@@ -52,21 +50,6 @@ gulp.task('compressJS', function() {
     return gulp.src('src/js/**/*.js')
       .pipe(uglify())
       .pipe(gulp.dest('prod/js'));
-});
-
-gulp.task('serve', () => {
-    browserSync.init({
-        server: {
-            baseDir: paths.dest
-        },
-        port: 3000,
-        open: true
-    });
-
-    // Watch and rebuild
-    gulp.watch(paths.html, gulp.series('compressHTML')).on('change', browserSync.reload);
-    gulp.watch(paths.css, gulp.series('compressCSS')).on('change', browserSync.reload);
-    gulp.watch(paths.js, gulp.series('transpileJSForDev')).on('change', browserSync.reload);
 });
 
 gulp.task('transpileJSForDev', function() {
@@ -85,10 +68,6 @@ gulp.task('transpileJSForProd', gulp.series(
     'validateJS',
     'compressJS',
     'transpileJSForDev',
-    'browser-sync',
     'default',
-    'serve',
     'transpileJSForProd'
 ));
-
-gulp.task('default', gulp.series('transpileJSForProd', 'serve'));
