@@ -71,3 +71,4 @@ gulp.task('build', gulp.series(
     'transpileJSForProd',
 ));
 
+gulp.task('default', gulp.series('build'));
