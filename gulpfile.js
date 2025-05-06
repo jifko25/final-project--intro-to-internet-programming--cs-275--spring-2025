@@ -1,43 +1,44 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
-const validateHTML = require('gulp-validateHTML');
-const validateCSS = require('gulp-validateCSS');
-const validateJS = require('gulp-validateJS');
-const sass = require('gulp-sass')(require('sass'));
+const htmlhint = require('gulp-htmlhint');
+const htmlmin = require('gulp-htmlmin');
 const uglify = require('gulp-uglify');
-const compressHTML = require('gulp-compressHTML');
-const compressCSS = require('gulp-compressCSS');
-const compressJS = require('gulp-compressJS');
-const stylelintrc = require('gulp-stylelintrc');
+const csslint = require('gulp-csslint');
+const cleanCSS = require('gulp-clean-css')
 const eslintrc = require('gulp-eslintrc');
 
-gulp.task('validateHTML', function() {
-    return gulp.src('src/**/*.html')
-      .pipe(validateHTML())
-      .pipe(validateHTML.reporter());
-});
+const paths = {
+    html: 'src/**/*.html',
+    css: 'src/**/*.css',
+    js: 'src/**/*.js',
+    dest: 'prod/'
+};
 
-gulp.task('compressHTML', function() {
-    return gulp.src('src/**/*.html')
-      .pipe(compressHTML({ collapseWhitespace: true }))
-      .pipe(gulp.dest('prod'));
-});
+gulp.task('validateHTML', () =>
+    gulp.src(paths.html)
+        .pipe(htmlhint())
+        .pipe(htmlhint.reporter())
+);
 
-gulp.task('validateCSS', function() {
-    return gulp.src('src/scss/**/*.scss')
-      .pipe(stylelintrc({
-        reporters: [
-          { formatter: 'string', console: true }
-        ]
-    }));
-});
+gulp.task('compressHTML', () =>
+    gulp.src(paths.html)
+        .pipe(htmlmin({ collapseWhitespace: true }))
+        .pipe(gulp.dest(paths.dest))
+);
 
-gulp.task('compressCSS', function() {
-    return gulp.src('src/scss/**/*.scss')
-      .pipe(sass().on('error', sass.logError))
-      .pipe(compressCSS())
-      .pipe(gulp.dest('prod/css'));
-});
+gulp.task('validateCSS', () =>
+    gulp.src(paths.css)
+        .pipe(csslint())
+        .pipe(csslint.formatter())
+);
+
+gulp.task('compress-css', () =>
+    gulp.src(paths.css)
+        .pipe(cleanCSS())
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest(paths.dest))
+);
+
 
 gulp.task('validateJS', function() {
     return gulp.src('src/js/**/*.js')
@@ -71,4 +72,7 @@ gulp.task('build', gulp.series(
     'transpileJSForProd',
 ));
 
-gulp.task('default', gulp.series('build'));
+gulp.task('prod', gulp.series(
+    gulp.parallel('validateHTML', 'validateCSS', 'validateJS'),
+    gulp.parallel('compressHTML', 'compressCSS', 'compressJS', 'transpileJSForDev')
+));
