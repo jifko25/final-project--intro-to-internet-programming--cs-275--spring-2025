@@ -6,7 +6,7 @@ const uglify = require('gulp-uglify');
 const csslint = require('gulp-csslint');
 const cleanCSS = require('gulp-clean-css')
 const eslint = require('gulp-eslint');
-const browserSync = require('browser-sync').create();
+const browserSync = require('browser-sync');
 
 const paths = {
     html: 'src/**/*.html',
