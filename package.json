@@ -15,11 +15,11 @@
     "gulp-sass": "^5.1.0",
     "gulp-compressHTML": "^5.0.1",
     "gulp-eslintrc": "^6.0.0",
-    "eslintrc": "^8.0.0",
+    "eslintrc": "^6.0.0",
     "gulp-stylelintrc": "^13.0.0",
     "stylelintrc": "^14.0.0",
     "gulp-validateHTML": "^0.5.0",
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0"
+    "@babel/core": "^7.27.1",
+    "@babel/preset-env": "^7.21.1"
   }
 }
