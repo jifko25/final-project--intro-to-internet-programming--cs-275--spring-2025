@@ -89,7 +89,6 @@ gulp.task('transpileJSForProd', gulp.series(
     'default',
     'serve',
     'transpileJSForProd'
-
 ));
 
 gulp.task('default', gulp.series('transpileJSForProd', 'serve'));
