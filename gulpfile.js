@@ -71,7 +71,8 @@ gulp.task('transpileJSForProd', gulp.series(
     'transpileJSForDev',
 ));
 
-gulp.task('prod', gulp.series(
+gulp.series('transpileJSForProd')(
     gulp.parallel('validateHTML', 'validateCSS', 'validateJS'),
     gulp.parallel('compressHTML', 'compressCSS', 'compressJS', 'transpileJSForDev')
-));
+);
+
