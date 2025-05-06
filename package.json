@@ -1,0 +1,25 @@
+{
+  "name": "final-assignment",
+  "version": "1.0.0",
+  "description": "Intro to internet programming final assignment. Making a moving diamond from text",
+  "main": "gulpfile.js",
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build"
+  },
+  "devDependencies": {
+    "gulp": "^5.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-compressCSS": "^0.1.7",
+    "gulp-uglify": "^3.0.2",
+    "gulp-sass": "^5.1.0",
+    "gulp-compressHTML": "^5.0.1",
+    "gulp-eslintrc": "^6.0.0",
+    "eslintrc": "^8.0.0",
+    "gulp-stylelintrc": "^13.0.0",
+    "stylelintrc": "^14.0.0",
+    "gulp-validateHTML": "^0.5.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0"
+  }
+}
