@@ -61,7 +61,7 @@ gulp.task('transpileJSForDev', function() {
       .pipe(gulp.dest('prod/js'));
   });
 
-gulp.task('build', gulp.series(
+gulp.task('transpileJSForProd', gulp.series(
     'validateHTML',
     'compressHTML',
     'validateCSS',
@@ -69,7 +69,6 @@ gulp.task('build', gulp.series(
     'validateJS',
     'compressJS',
     'transpileJSForDev',
-    'transpileJSForProd',
 ));
 
 gulp.task('prod', gulp.series(
