@@ -5,7 +5,7 @@ const htmlmin = require('gulp-htmlmin');
 const uglify = require('gulp-uglify');
 const csslint = require('gulp-csslint');
 const cleanCSS = require('gulp-clean-css')
-const eslintrc = require('gulp-eslintrc');
+const eslint = require('gulp-eslint');
 
 const paths = {
     html: 'src/**/*.html',
@@ -43,8 +43,8 @@ gulp.task('compress-css', () =>
 gulp.task('validateJS', function() {
     return gulp.src('src/js/**/*.js')
       .pipe(eslint())
-      .pipe(eslintrc.format())
-      .pipe(eslintrc.failAfterError());
+      .pipe(eslint.format())
+      .pipe(eslint.failAfterError());
 });
 
 gulp.task('compressJS', function() {
