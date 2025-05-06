@@ -32,7 +32,7 @@ gulp.task('validateCSS', () =>
         .pipe(csslint.formatter())
 );
 
-gulp.task('compress-css', () =>
+gulp.task('compressCSS', () =>
     gulp.src(paths.css)
         .pipe(cleanCSS())
         .pipe(rename({ suffix: '.min' }))
